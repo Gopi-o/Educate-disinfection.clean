@@ -8,8 +8,12 @@ class PageController extends Controller
 {
     public function home()
     {
-        // TODO: подтянуть услуги для слайдера/превью, акции, отзывы
-        return view('home');
+        $services = \App\Models\Service::where('is_active', true)
+        ->orderBy('sort_order')
+        ->take(4)
+        ->get();
+
+        return view('home', compact('services'));
     }
 
     public function about()
