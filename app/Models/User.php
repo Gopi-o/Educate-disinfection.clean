@@ -22,9 +22,24 @@ class User extends Authenticatable
         'is_subscribed' => 'boolean',
     ];
 
+    public const ROLE_USER = 'user';
+    public const ROLE_MANAGER = 'manager';
+    public const ROLE_ADMIN = 'admin';
+
+    public static array $roles = [
+        self::ROLE_USER    => 'Клиент',
+        self::ROLE_MANAGER => 'Менеджер',
+        self::ROLE_ADMIN   => 'Администратор',
+    ];
+
     public function isAdmin(): bool
     {
-        return $this->role === 'admin';
+        return $this->role === self::ROLE_ADMIN;
+    }
+
+    public function isManager(): bool
+    {
+        return $this->role === self::ROLE_MANAGER || $this->isAdmin();
     }
 
     public function orders()
