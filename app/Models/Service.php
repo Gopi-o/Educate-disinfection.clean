@@ -42,7 +42,7 @@ class Service extends Model
             : asset('img/home_promo.jpg');
     }
 
-    public function getFormattedPriceAttribute(): stream_set_blocking{
+    public function getFormattedPriceAttribute(){
         return number_format($this->price, 0, ',', ' ') . ' ₽';
     }
 }
