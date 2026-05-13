@@ -100,7 +100,7 @@
                 </div>
                 <div class="col-lg-4 col-md-6">
                     <h5>Контакты</h5>
-                    <p class="small mb-2"><i class="bi bi-geo-alt me-2"></i>г. Москва, ул. Примерная, д. 10</p>
+                    <p class="small mb-2"><i class="bi bi-geo-alt me-2"></i>г. Ижевск, ул. Удмуртская, д. 10</p>
                     <p class="small mb-2"><i class="bi bi-telephone me-2"></i>+7 (800) 123-45-67</p>
                     <p class="small mb-2"><i class="bi bi-envelope me-2"></i>info@san-centr.ru</p>
                     <p class="small mb-0"><i class="bi bi-clock me-2"></i>Пн–Пт: 08:00–20:00, Сб–Вс: 09:00–18:00</p>

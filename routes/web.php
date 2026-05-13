@@ -2,6 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -57,7 +63,7 @@ Route::prefix('dashboard')->name('dashboard.')->middleware('auth')->group(functi
 });
 
 
-Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->group(function () {
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin,manager'])->group(function () {
     
     Route::get('/', [AdminController::class, 'dashboard'])->name('dashboard');
     
@@ -85,11 +91,9 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:admin'])->grou
     Route::patch('/reviews/{review}/reject', [AdminController::class, 'reviewsReject'])->name('reviews.reject');
     Route::delete('/reviews/{review}', [AdminController::class, 'reviewsDestroy'])->name('reviews.destroy');
     
-    Route::get('/settings', [AdminController::class, 'settingsIndex'])->name('settings.index');
-    Route::patch('/settings', [AdminController::class, 'settingsUpdate'])->name('settings.update');
-    
     Route::get('/users', [AdminController::class, 'usersIndex'])->name('users.index');
     Route::get('/users/{user}', [AdminController::class, 'usersShow'])->name('users.show');
+    Route::patch('/users/{user}/role', [AdminController::class, 'usersUpdateRole'])->name('users.role')->middleware('role:admin');
     
     Route::get('/statistics', [AdminController::class, 'statistics'])->name('statistics');
 });

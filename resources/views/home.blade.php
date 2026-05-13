@@ -57,70 +57,31 @@
             <p class="section-subtitle">Полный спектр санитарных работ для частных лиц и организаций</p>
         </div>
         <div class="row g-4">
-            <!-- Карточка 1 -->
+            @forelse($services as $service)
             <div class="col-md-6 col-lg-3">
-                <div class="card card-service">
-                    <!-- ЗАГЛУШКА: фото процесса дезинфекции (распыление раствора) -->
-                    <img src="https://via.placeholder.com/400x200/e8f5f1/1a5f4a?text=Дезинфекция" 
-                         class="card-img-top" alt="Дезинфекция">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Дезинфекция</h5>
-                        <p class="card-text text-muted small">Уничтожение вирусов, бактерий, грибков и патогенных микроорганизмов на любых поверхностях.</p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="price">от 1 500 ₽</span>
-                            <a href="{{ route('services.show', 'dezinfekciya') }}" class="btn btn-outline-custom btn-sm">Подробнее</a>
+                <div class="card card-service h-100">
+                    <img src="{{ $service->image_url }}" 
+                         class="card-img-top" 
+                         alt="{{ $service->title }}"
+                         style="height: 200px; object-fit: cover;">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title fw-bold">{{ $service->title }}</h5>
+                        <p class="card-text text-muted small flex-grow-1">
+                            {{ Str::limit($service->description, 100) }}
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center mt-3 pt-3 border-top">
+                            <span class="price">{{ $service->formatted_price }}</span>
+                            <a href="{{ route('services.show', $service->slug) }}" class="btn btn-outline-custom btn-sm">Подробнее</a>
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- Карточка 2 -->
-            <div class="col-md-6 col-lg-3">
-                <div class="card card-service">
-                    <!-- ЗАГЛУШКА: фото обработки от насекомых -->
-                    <img src="https://via.placeholder.com/400x200/e8f5f1/1a5f4a?text=Дезинсекция" 
-                         class="card-img-top" alt="Дезинсекция">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Дезинсекция</h5>
-                        <p class="card-text text-muted small">Уничтожение тараканов, клопов, блох, муравьев, ос и других насекомых-вредителей.</p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="price">от 2 000 ₽</span>
-                            <a href="{{ route('services.show', 'dezinsekciya') }}" class="btn btn-outline-custom btn-sm">Подробнее</a>
-                        </div>
-                    </div>
-                </div>
+            @empty
+            <div class="col-12 text-center py-5">
+                <i class="bi bi-inbox fs-1 text-muted"></i>
+                <p class="text-muted mt-3">Услуги пока не добавлены</p>
             </div>
-            <!-- Карточка 3 -->
-            <div class="col-md-6 col-lg-3">
-                <div class="card card-service">
-                    <!-- ЗАГЛУШКА: фото установки капканов/приманок -->
-                    <img src="https://via.placeholder.com/400x200/e8f5f1/1a5f4a?text=Дератизация" 
-                         class="card-img-top" alt="Дератизация">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Дератизация</h5>
-                        <p class="card-text text-muted small">Борьба с крысами, мышами и другими грызунами. Закрытие входов, установка приманок.</p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="price">от 2 500 ₽</span>
-                            <a href="{{ route('services.show', 'deratizaciya') }}" class="btn btn-outline-custom btn-sm">Подробнее</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Карточка 4 -->
-            <div class="col-md-6 col-lg-3">
-                <div class="card card-service">
-                    <!-- ЗАГЛУШКА: фото до/после устранения запаха -->
-                    <img src="https://via.placeholder.com/400x200/e8f5f1/1a5f4a?text=Дезодорация" 
-                         class="card-img-top" alt="Дезодорация">
-                    <div class="card-body">
-                        <h5 class="card-title fw-bold">Дезодорация</h5>
-                        <p class="card-text text-muted small">Устранение неприятных запахов: после пожара, затопления, разложения, табака.</p>
-                        <div class="d-flex justify-content-between align-items-center mt-3">
-                            <span class="price">от 3 000 ₽</span>
-                            <a href="{{ route('services.show', 'dezodoraciya') }}" class="btn btn-outline-custom btn-sm">Подробнее</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @endforelse
         </div>
         <div class="text-center mt-4">
             <a href="{{ route('services.index') }}" class="btn btn-primary-custom">
