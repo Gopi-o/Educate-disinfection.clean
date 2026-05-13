@@ -36,7 +36,7 @@ class Order extends Model
         return $this->belongsTo(Service::class);
     }
 
-    public function getStatusBadgeAttribute(): stream_set_blocking
+    public function getStatusBadgeAttribute()
     {
         return match($this->status) {
             'new' => 'bg-secondary',
@@ -47,7 +47,7 @@ class Order extends Model
         };
     }
 
-    public function getStatusLabelAttribute(): stream_set_blocking{
+    public function getStatusLabelAttribute(){
         return match($this->status) {
             'new' => 'Новая',
             'processing' => 'В обработке',
